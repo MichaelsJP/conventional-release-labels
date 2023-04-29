@@ -1,0 +1,25 @@
+on:
+  pull_request:
+    types: [ opened, edited, synchronize ]
+name: Run conventional commits tasks
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the commit style against the 'conventional commit styling'
+        uses: MichaelsJP/action-conventional-commits@master
+        with:
+          VALID_LABELS: '["feat","fix","docs","style","refactor","test","build","perf","ci","chore","revert","merge","wip"]'
+          GITHUB_TOKEN: ${{ secrets.PR_TOKEN }}
+  label:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add labels to pull request
+        if: ${{ success() }}
+        uses: MichaelsJP/conventional-release-labels@integrate-custom-tools
+        with:
+          type_labels: '{ "feat": "feature", "fix": "fix", "build": "build", "docs": "documentation", "style": "style", "refactor": "refactor", "test": "test", "perf": "performance", "ci": "continuous integration"}'
+          ignored_types: '[ "chore" ]'
+          ignore_label: ignore-for-release
+          token: ${{ secrets.PR_TOKEN }}

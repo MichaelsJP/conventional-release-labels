@@ -5,6 +5,9 @@ changelog:
     authors:
       - octocat
   categories:
+    - title: Build 🛠
+      labels:
+        - build
     - title: Breaking Changes 🛠
       labels:
         - breaking
@@ -16,5 +19,8 @@ changelog:
         - fix
     - title: Other Changes
       labels:
-        - "*"
+        - "!ignore-for-release"
+    - title: Ignore for Release
+      labels:
+        - "ignore-for-release"
 
