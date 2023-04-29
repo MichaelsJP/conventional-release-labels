@@ -64,6 +64,7 @@ async function main () {
     // Also remove the special ignore label:
     await api.removeLabel(ignoreLabel, payload)
     // Add special ignore label to conventional commit types like "chore:":
+    core.info(`ℹ️ Found labels: ${JSON.stringify(labels)}`)
     if (ignoredTypes.includes(cc.type)) {
       await api.addLabels([ignoreLabel], payload)
     } else {
@@ -103,6 +104,7 @@ async function removeLabel (name, payload) {
 }
 
 let cachedOctokit
+
 function getOctokit () {
   if (!cachedOctokit) {
     const token = core.getInput('token')
