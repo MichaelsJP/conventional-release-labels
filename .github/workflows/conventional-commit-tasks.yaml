@@ -19,7 +19,7 @@ jobs:
         if: ${{ success() }}
         uses: MichaelsJP/conventional-release-labels@integrate-custom-tools
         with:
-          type_labels: '{ "feat": "feature", "fix": "fix", "build": "build", "docs": "documentation", "style": "style", "refactor": "refactor", "test": "test", "perf": "performance", "ci": "continuous integration"}'
+          type_labels: '{ "ci": "continuous integration" }'
           ignored_types: '[ "chore" ]'
           ignore_label: ignore-for-release
           token: ${{ secrets.PR_TOKEN }}
